@@ -5,9 +5,25 @@ const App = () => {
   const anecdotes = useSelector((state) => state)
   const dispatch = useDispatch()
 
+  const getId = () => (100000 * Math.random()).toFixed(0)
+
   const vote = (id) => {
     console.log('vote', id)
     dispatch({ type: 'LIKE', data: { id } })
+  }
+
+  const addAnecdote = (e) => {
+    e.preventDefault()
+    const anecdote = e.target.anecdote.value
+    e.target.anecdote.value = ''
+    dispatch({
+      type: 'NEW_ANECDOTE',
+      data: {
+        content: anecdote,
+        id: getId(),
+        votes: 0,
+      },
+    })
   }
 
   return (
@@ -23,11 +39,11 @@ const App = () => {
         </div>
       ))}
       <h2>create new</h2>
-      <form>
+      <form onSubmit={addAnecdote}>
         <div>
-          <input />
+          <input name='anecdote' />
         </div>
-        <button>create</button>
+        <button type='submit'>create</button>
       </form>
     </div>
   )
