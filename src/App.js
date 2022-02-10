@@ -5,6 +5,10 @@ const App = () => {
   const anecdotes = useSelector((state) => state)
   const dispatch = useDispatch()
 
+  anecdotes.sort(function (a, b) {
+    return b.votes - a.votes
+  })
+
   const getId = () => (100000 * Math.random()).toFixed(0)
 
   const vote = (id) => {
