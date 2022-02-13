@@ -8,7 +8,7 @@ const getAll = async () => {
 }
 
 const createNew = async (content) => {
-  const response = await axios.post(baseURL, { content })
+  const response = await axios.post(baseURL, { content, votes: 0 })
   return response.data
 }
 
